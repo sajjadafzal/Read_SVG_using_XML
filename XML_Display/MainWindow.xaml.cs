@@ -72,16 +72,14 @@ namespace XML_Display
 
             foreach (XElement shp in shapes)
             {
-                if (shp.Value == "Q1C")
-                {
-                    
-                }
+               
                 //if (shp.ToString().Length >= 0) { 
                 double x = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("x").Value);
                 double y = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("y").Value);
                 double width = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("width").Value);
                 double height = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("height").Value);
-
+                string title = shp.Value[0..^1];
+                string exportValue = shp.Value[^1].ToString(); //Convert the char to string
                 //===Get the transform="translate(48.48,-355.68)" from parent node and apply it to the child for absolute positions
                 String transformString = shp.Parent.Attribute("transform").Value;
                 // Using Regex to get numbers from the text.
@@ -97,12 +95,12 @@ namespace XML_Display
 
                 String[] numbers = transformString.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-                double X1 = x + Convert.ToDouble(numbers[0]);
-                double Y1 = y + Convert.ToDouble(numbers[1]);
-                double X2 = X1 + width;
-                double Y2 = Y1 + height;
+                double X1 = Math.Round(x + Convert.ToDouble(numbers[0]), 2);
+                double Y1 = Math.Round(y + Convert.ToDouble(numbers[1]), 2);
+                double X2 = Math.Round(X1 + width, 2);
+                double Y2 = Math.Round(Y1 + height, 2);
 
-                sb.AppendLine($"{shp.Value.ToString()}: [{X1} , {Y1}] [{X2} , {Y2}] [{width},{height}]");
+                sb.AppendLine($"{shp.Value.ToString()}: Export[{title}] [{X1} , {Y1}] [{X2} , {Y2}] [{width},{height}]");
                 //}
 
 
@@ -161,6 +159,67 @@ namespace XML_Display
 
 
             //MessageBox.Show(doc2.FirstNode.ToString());
+
+        }
+
+        private void btn_ReadMarks_Click(object sender, RoutedEventArgs e)
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+            IEnumerable<XElement> shapes =
+                from shps in svg.Descendants().Elements($"{ns}title")//
+                where shps.ToString().Contains("Mark") /*&& (!shps.ToString().Contains("_"))
+                                                     && (shps.Value.ToString().Length <= 5)
+                                                     && (shps.ToString().Contains("A")
+                                                        || shps.ToString().Contains("B")
+                                                        || shps.ToString().Contains("C")
+                                                        || shps.ToString().Contains("D")
+                                                        || shps.ToString().Contains("E"))*/
+                select shps;
+
+            if (shapes == null)
+            {
+                MessageBox.Show("Hard Luck");
+            }
+
+            foreach (XElement shp in shapes)
+            {
+                //if (shp.ToString().Length >= 0) { 
+                double x = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("x").Value);
+                double y = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("y").Value);
+                double width = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("width").Value);
+                double height = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("height").Value);
+
+                //===Get the transform="translate(48.48,-355.68)" from parent node and apply it to the child for absolute positions
+                String transformString = shp.Parent.Attribute("transform").Value;
+                // Using Regex to get numbers from the text.
+                //string[] numbers = Regex.Split(shp.Parent.Attribute("transform").Value, @"\-*[0-9]+(.[0-9]+)*");
+                //foreach(string n in numbers)
+                //{
+                //sb.AppendLine(n);
+                //}
+                //sb.AppendLine("");
+
+                transformString = transformString.Remove(0, 10);
+                transformString = transformString.Remove(transformString.Length - 1);
+
+                String[] numbers = transformString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+                double X1 = Math.Round(x + Convert.ToDouble(numbers[0]),2);
+                double Y1 = Math.Round(y + Convert.ToDouble(numbers[1]), 2);
+                double X2 = Math.Round(X1 + width, 2);
+                double Y2 = Math.Round(Y1 + height, 2);
+
+                sb.AppendLine($"{shp.Value.ToString()}: [{X1} , {Y1}] [{X2} , {Y2}] [{width},{height}]");
+                //}
+
+
+
+            }
+
+            myTextBlock2.Text = sb.ToString();
+
 
         }
     }

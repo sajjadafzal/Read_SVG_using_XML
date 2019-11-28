@@ -16,7 +16,13 @@
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Button x:Name="btn_ReadMarks" Content="Read Marks" Grid.Column="0" Grid.Row="0" Width="Auto" Height="Auto" Click="btn_ReadMarks_Click"/>
+        <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0">
+            <Button x:Name="btn_ReadMarks" Margin="5" Content="Read Marks"  Width="Auto" Height="Auto" Click="btn_ReadMarks_Click"/>
+            <Button x:Name="btn_ReadDocProperties" Margin="5" Content="Read Doc Props" Width="Auto" Height="Auto" Click="btn_ReadDocProperties_Click"/>
+            <Button x:Name="btn_ReadBarcode" Margin="5" Content="Read Barcode" Width="Auto" Height="Auto" Click="btn_ReadBarcode_Click"/>
+            <Button x:Name="btn_ReadPostCenterTime" Margin="5" Content="Read Post Center Time" Width="Auto" Height="Auto" Click="btn_ReadPostCenterTime_Click"/>
+        </StackPanel>
+        
         <ScrollViewer x:Name="scrollViewer" Grid.Column="0" Grid.Row="1">
             <TextBox x:Name="myTextBlock"  Text="----" TextWrapping="Wrap" IsEnabled="False" HorizontalAlignment="Left" VerticalAlignment="Top"   Height="Auto" Width="Auto"/>
         </ScrollViewer>

@@ -35,6 +35,7 @@ namespace XML_Display
             //fileAddress = "D:\\svg\\Customers.xml";
             //fileAddress = "D:\\svg\\Customers_Attributes.xml";
             fileAddress = "D:\\svg\\AnswerSheetSVG.svg";
+            //fileAddress = "D:\\svg\\design.svg";
             ns = "{http://www.w3.org/2000/svg}";
         }
 
@@ -221,6 +222,125 @@ namespace XML_Display
             myTextBlock2.Text = sb.ToString();
 
 
+        }
+
+        private void btn_ReadDocProperties_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            //IEnumerable<XElement> shapes =
+            //    from shps in svg.Elements($"{ns}svg")//
+            //    /*where shps.ToString().Contains("Mark") /*&& (!shps.ToString().Contains("_"))
+            //                                         && (shps.Value.ToString().Length <= 5)
+            //                                         && (shps.ToString().Contains("A")
+            //                                            || shps.ToString().Contains("B")
+            //                                            || shps.ToString().Contains("C")
+            //                                            || shps.ToString().Contains("D")
+            //                                            || shps.ToString().Contains("E"))*/
+            //    select shps;
+
+            //foreach (XElement shp in shapes)
+            //{
+            //    sb.Append(shp.ToString());
+            //}
+            // using regular expressin we can do this like "\d+(\.\d+)?"
+            //string[] numbers = svg.Attribute("viewBox").Value.Split(" ", StringSplitOptions.RemoveEmptyEntries);
+            MatchCollection numbers = Regex.Matches(svg.Attribute("viewBox").Value, @"\d+(\.\d+)?");
+            foreach (Match n in numbers)
+            {
+               sb.Append($"{Convert.ToDouble(n.Value)}, ");
+            }
+
+            this.myTextBlock2.Text = sb.ToString();
+        }
+
+        private void btn_ReadBarcode_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            IEnumerable<XElement> shapes =
+                from shps in svg.Descendants().Elements($"{ns}title")//
+                where shps.Value == "RollNoBarcode"
+                select shps.Parent;
+            
+            foreach (XElement shp in shapes)
+            {
+                double x = Convert.ToDouble(shp.Element($"{ns}rect").Attribute("x").Value);
+                double y = Convert.ToDouble(shp.Element($"{ns}rect").Attribute("y").Value);
+                double width = Convert.ToDouble(shp.Element($"{ns}rect").Attribute("width").Value);
+                double height = Convert.ToDouble(shp.Element($"{ns}rect").Attribute("height").Value);
+
+                String transformString = shp.Attribute("transform").Value;
+                transformString = transformString.Remove(0, 10);
+                transformString = transformString.Remove(transformString.Length - 1);
+
+                String[] numbers = transformString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+                double X1 = Math.Round(x + Convert.ToDouble(numbers[0]), 2);
+                double Y1 = Math.Round(y + Convert.ToDouble(numbers[1]), 2);
+                double X2 = Math.Round(X1 + width, 2);
+                double Y2 = Math.Round(Y1 + height, 2);
+
+                sb.AppendLine($"{shp.Value.ToString()}: [{X1} , {Y1}] [{X2} , {Y2}] [{width},{height}]");
+               
+            }
+            
+            this.myTextBlock2.Text = sb.ToString();
+
+        }
+
+        private void btn_ReadPostCenterTime_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            IEnumerable<XElement> shapes =
+                from shps in svg.Descendants().Elements($"{ns}title")//
+                where ((shps.Value[0].ToString() == "C") || (shps.Value[0].ToString() == "T") || (shps.Value[0].ToString() == "P")) 
+                && (shps.Value[^1].ToString() == "O") && (shps.Value.ToString().Length == 3)
+                select shps;
+
+            if (shapes == null)
+            {
+                MessageBox.Show("Hard Luck");
+            }
+
+            foreach (XElement shp in shapes)
+            {
+
+                //if (shp.ToString().Length >= 0) { 
+                double x = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("x").Value);
+                double y = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("y").Value);
+                double width = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("width").Value);
+                double height = Convert.ToDouble(shp.Parent.Element($"{ns}rect").Attribute("height").Value);
+                string title = shp.Value[0..^1];
+                string exportValue = shp.Value[^1].ToString(); //Convert the char to string
+                //===Get the transform="translate(48.48,-355.68)" from parent node and apply it to the child for absolute positions
+                String transformString = shp.Parent.Attribute("transform").Value;
+                // Using Regex to get numbers from the text.
+                //string[] numbers = Regex.Split(shp.Parent.Attribute("transform").Value, @"\-*[0-9]+(.[0-9]+)*");
+                //foreach(string n in numbers)
+                //{
+                //sb.AppendLine(n);
+                //}
+                //sb.AppendLine("");
+
+                transformString = transformString.Remove(0, 10);
+                transformString = transformString.Remove(transformString.Length - 1);
+
+                String[] numbers = transformString.Split(',', StringSplitOptions.RemoveEmptyEntries);
+
+                double X1 = Math.Round(x + Convert.ToDouble(numbers[0]), 2);
+                double Y1 = Math.Round(y + Convert.ToDouble(numbers[1]), 2);
+                double X2 = Math.Round(X1 + width, 2);
+                double Y2 = Math.Round(Y1 + height, 2);
+
+                sb.AppendLine($"{shp.Value.ToString()}: Export[{title}] [{X1} , {Y1}] [{X2} , {Y2}] [{width},{height}]");
+                //}
+
+
+
+            }
+
+            myTextBlock2.Text = sb.ToString();
         }
     }
 }

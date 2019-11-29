@@ -1,0 +1,26 @@
+﻿<Window x:Class="BitmapCopyPixels.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BitmapCopyPixels"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="10*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
+            <Button x:Name="btn_DecodeBarcode" Content="Decode Barcode" Click="btn_DecodeBarcode_Click" Margin="5"></Button>
+            <Button x:Name="btn_CopyPixels" Content="Copy Pixels" Click="btn_CopyPixels_Click" Margin="5"></Button>
+        </StackPanel>
+        <Image x:Name="ImageControl" Grid.Row="1" Grid.Column="0"></Image>
+        <Image x:Name="ImageControl2" Grid.Row="1" Grid.Column="1"></Image>
+        <!--<TextBlock x:Name="TextBlock" Text="xxx" Grid.Row="1" Grid.Column="1"/>-->
+    </Grid>
+</Window>

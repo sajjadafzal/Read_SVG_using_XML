@@ -25,6 +25,7 @@ namespace ExcelReadDisplayOnUI
     public partial class MainWindow : Window
     {
         DataTable table = new DataTable();
+        bool HeadersAdded = false;
         
         public MainWindow()
         {
@@ -40,24 +41,29 @@ namespace ExcelReadDisplayOnUI
             using (ExcelPackage pck = new ExcelPackage(fileInfo))
             {
                 ExcelWorksheet ws = pck.Workbook.Worksheets[0];
-                int i = 1;
-                while (ws.Cells[1,i].Value != null)
-                {
+                
                     //DataColumn Col = new DataColumn();
                     //Col.ColumnName = ws.Cells[1, i].Value.ToString();
-                    table.Columns.Add(ws.Cells[1, i].Value.ToString(),typeof(string));
-                    i++;
+                if (!HeadersAdded)
+                {
+                    table.Columns.Add(ws.Cells[1, 1].Value.ToString(), typeof(int));
+                    table.Columns.Add(ws.Cells[1, 2].Value.ToString(), typeof(string));
+                    table.Columns.Add(ws.Cells[1, 3].Value.ToString(), typeof(int));
                 }
+                
+                    
+               
+                HeadersAdded = true;
 
-                i = 2;
+                int i = 2;
                 while (ws.Cells[i, 1].Value != null)
                 {
                     //DataColumn Col = new DataColumn();
                     //Col.ColumnName = ws.Cells[1, i].Value.ToString();
                     DataRow row = table.NewRow();
-                    row[ws.Cells[1, 1].Value.ToString()] = ws.Cells[i, 1].Value.ToString();
+                    row[ws.Cells[1, 1].Value.ToString()] = ws.Cells[i, 1].Value;
                     row[ws.Cells[1, 2].Value.ToString()] = ws.Cells[i, 2].Value.ToString();
-                    row[ws.Cells[1, 3].Value.ToString()] = ws.Cells[i, 3].Value.ToString();
+                    row[ws.Cells[1, 3].Value.ToString()] = ws.Cells[i, 3].Value;
                     table.Rows.Add(row);
                     
                     i++;
@@ -67,6 +73,7 @@ namespace ExcelReadDisplayOnUI
             }
 
             //dataGrid.ItemsSource = table.DefaultView;
+
             dataGrid.DataContext = table;
             
            
@@ -75,13 +82,22 @@ namespace ExcelReadDisplayOnUI
         private void btn_ChangeItem_Click(object sender, RoutedEventArgs e)
         {
 
-            table.Columns[1].ColumnName = "Changed";
+            table.Rows[3][1] = "Sajjad Afzal Khattak";
             //dataGrid
             
         }
 
-        private void contextChanged()
+        private void btn_ChangeItemBack_Click(object sender, RoutedEventArgs e)
         {
+            table.Rows[3][1] = "Sajjad Afzal";
+        }
+
+        private void btn_FilteredDataView_Click(object sender, RoutedEventArgs e)
+        {
+            DataView dv = new DataView(table);
+            dv.Sort = "Age DESC";
+            dv.RowFilter = "Age > 35";
+            dataGrid.DataContext = dv;
 
         }
     }

@@ -14,7 +14,9 @@
         <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Button Name="btn_DisplayExcel" Content="Display" Click="btn_DisplayExcel_Click" Margin="2"/>
             <Button Name="btn_ChangeItem" Content="Change" Click="btn_ChangeItem_Click"  Margin="2"/>
+            <Button Name="btn_ChangeItemBack" Content="Change Back" Click="btn_ChangeItemBack_Click"  Margin="2"/>
+            <Button Name="btn_FilteredDataView" Content="Filtered Data" Click="btn_FilteredDataView_Click"  Margin="2"/>
         </StackPanel>
-        <DataGrid Name="dataGrid" ItemsSource="{Binding Path=., Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" Grid.Row="1" AutoGenerateColumns="True" ></DataGrid>
+        <DataGrid Name="dataGrid" ItemsSource="{Binding}" Grid.Row="1" AutoGenerateColumns="True" ></DataGrid>
     </Grid>
 </Window>

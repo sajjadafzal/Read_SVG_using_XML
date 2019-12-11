@@ -43,11 +43,26 @@ namespace ExcelReadDisplayOnUI
                 int i = 1;
                 while (ws.Cells[1,i].Value != null)
                 {
-                    DataColumn Col = new DataColumn();
-                    Col.ColumnName = ws.Cells[1, i].Value.ToString();
-                    table.Columns.Add(Col);
+                    //DataColumn Col = new DataColumn();
+                    //Col.ColumnName = ws.Cells[1, i].Value.ToString();
+                    table.Columns.Add(ws.Cells[1, i].Value.ToString(),typeof(string));
                     i++;
                 }
+
+                i = 2;
+                while (ws.Cells[i, 1].Value != null)
+                {
+                    //DataColumn Col = new DataColumn();
+                    //Col.ColumnName = ws.Cells[1, i].Value.ToString();
+                    DataRow row = table.NewRow();
+                    row[ws.Cells[1, 1].Value.ToString()] = ws.Cells[i, 1].Value.ToString();
+                    row[ws.Cells[1, 2].Value.ToString()] = ws.Cells[i, 2].Value.ToString();
+                    row[ws.Cells[1, 3].Value.ToString()] = ws.Cells[i, 3].Value.ToString();
+                    table.Rows.Add(row);
+                    
+                    i++;
+                }
+
 
             }
 

@@ -95,8 +95,8 @@ namespace ExcelReadDisplayOnUI
         private void btn_FilteredDataView_Click(object sender, RoutedEventArgs e)
         {
             DataView dv = new DataView(table);
-            dv.Sort = "Age DESC";
-            dv.RowFilter = "Age > 35";
+            dv.Sort = "[Salary per month] DESC";
+            dv.RowFilter = "[Salary per month] > 100000";
             dataGrid.DataContext = dv;
 
         }

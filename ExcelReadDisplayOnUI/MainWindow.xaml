@@ -17,6 +17,6 @@
             <Button Name="btn_ChangeItemBack" Content="Change Back" Click="btn_ChangeItemBack_Click"  Margin="2"/>
             <Button Name="btn_FilteredDataView" Content="Filtered Data" Click="btn_FilteredDataView_Click"  Margin="2"/>
         </StackPanel>
-        <DataGrid Name="dataGrid" ItemsSource="{Binding}" Grid.Row="1" AutoGenerateColumns="True" ></DataGrid>
+        <DataGrid Name="dataGrid" ItemsSource="{Binding}" Grid.Row="1"></DataGrid>
     </Grid>
 </Window>

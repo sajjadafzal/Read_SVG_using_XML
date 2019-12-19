@@ -7,13 +7,16 @@
         mc:Ignorable="d"
         Title="Settings" x:Name="winSettings" Height="200" Width="200" Activated="Window_Activated" WindowStartupLocation="CenterOwner" HorizontalAlignment="Center" VerticalAlignment="Center" SizeToContent="WidthAndHeight" MinWidth="200" MinHeight="200" MaxWidth="200" MaxHeight="400" ResizeMode="NoResize" ShowInTaskbar="False" WindowStyle="ToolWindow">
     <Window.Resources>
-        
+        <local:Settings x:Key="mySettings"/>
     </Window.Resources>
     <Grid>
         <StackPanel Margin="5">
-            <CheckBox x:Name="CB1" Content="Image Process" Margin="5" IsChecked="{Binding IsChecked, ElementName=winSettings}"/>
-            <CheckBox x:Name="CB2" Content="Image Display" Margin="5"/>
+            <CheckBox x:Name="CB1" Content="Image Process" Margin="5" IsChecked="{Binding Path=CB1_Check}"/>
+            <CheckBox x:Name="CB2" Content="Image Display" Margin="5" IsChecked="{Binding Path=CB2_Check}"/>
             <Button x:Name="btn_ShowOwner" Content="Show Owner" Click="btn_ShowOwner_Click" Margin="5"/>
         </StackPanel>
     </Grid>
+    <Window.DataContext>
+        <Binding Source="{StaticResource mySettings}"/>
+    </Window.DataContext>
 </Window>

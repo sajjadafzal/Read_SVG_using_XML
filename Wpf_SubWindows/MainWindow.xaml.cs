@@ -41,38 +41,7 @@ namespace Wpf_SubWindows
             //if (winSettings.IsLoaded)
             
         }
-    }
+    }   
+
 }
 
-public class Settings : DependencyObject,INotifyPropertyChanged
-{
-    private bool _CB1_Check;
-    public bool CB1_Check 
-    { 
-        get 
-        {
-            return _CB1_Check;
-        } 
-        set 
-        {
-            _CB1_Check = value;
-        }
-    }
-    public Settings()
-    {
-
-    }
-
-    event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-    {
-        add
-        {
-            throw new NotImplementedException();
-        }
-
-        remove
-        {
-            throw new NotImplementedException();
-        }
-    }
-}

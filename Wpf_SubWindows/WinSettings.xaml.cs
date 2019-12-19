@@ -18,11 +18,12 @@ namespace Wpf_SubWindows
     public partial class WinSettings : Window
     {
         Settings mySettings;
-        private bool IsChecked;
+        //private bool IsChecked;
         public WinSettings(Settings settings)
         {
             InitializeComponent();
             mySettings = settings;
+            this.DataContext = mySettings;
             //IsChecked = mySettings.CheckBoxOneisChecked;
             //this.DataContext = IsChecked;
             //this.CB1.IsChecked = mySettings.CheckBoxOneisChecked;
@@ -37,7 +38,8 @@ namespace Wpf_SubWindows
 
         private void btn_ShowOwner_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(this.Owner.ToString());
+            mySettings.CB2_Check = false;
+            //MessageBox.Show(this.Owner.ToString());
         }
     }
 }

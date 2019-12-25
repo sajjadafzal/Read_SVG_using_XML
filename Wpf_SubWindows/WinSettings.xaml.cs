@@ -38,7 +38,7 @@ namespace Wpf_SubWindows
 
         private void btn_ShowOwner_Click(object sender, RoutedEventArgs e)
         {
-            mySettings.CB2_Check = false;
+            mySettings.CB1_Check = false;
             //MessageBox.Show(this.Owner.ToString());
         }
     }

@@ -21,7 +21,7 @@ namespace Wpf_SubWindows
                 {
                     _CB1_Check = value;
                     // this.propertyChanged(this, new PropertyChangedEventArgs("CB1_Check")); //to notify an incode change to ui
-
+                    PropertyChanged(this, new PropertyChangedEventArgs("CB1_Check"));
                 }
             }
         }
@@ -44,21 +44,25 @@ namespace Wpf_SubWindows
         {
 
         }
-        private PropertyChangedEventHandler propertyChanged;
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
-        {
-            add
-            {
-                //throw new NotImplementedException();
-                this.propertyChanged += value;
-            }
+        //IMPLICIT IMPLEMENTATION OF INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
 
-            remove
-            {
-                //throw new NotImplementedException();
-                this.propertyChanged -= value;
-            }
-        }
+        //ECPLICIT IMPLEMENTATION OF INotifyPropertyChanged
+        //private PropertyChangedEventHandler propertyChanged;
+        //event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged
+        //{
+        //    add
+        //    {
+        //        //throw new NotImplementedException();
+        //        this.propertyChanged += value;
+        //    }
+
+        //    remove
+        //    {
+        //        //throw new NotImplementedException();
+        //        this.propertyChanged -= value;
+        //    }
+        //}
 
         //private void RaisePropertyChanged(string propertyName)
         //{

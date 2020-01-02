@@ -25,7 +25,7 @@ namespace UserControlDemo
         public MainWindow()
         {
             InitializeComponent();
-            sliderControlSettings = new SliderControlSettings("Threshold",0, 100, 30);
+            sliderControlSettings = new SliderControlSettings("Threshold",0, 200, 30);
             
             
         }

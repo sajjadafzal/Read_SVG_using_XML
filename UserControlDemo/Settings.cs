@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Text;
+using System.Windows;
 
 namespace UserControlDemo
 {
@@ -23,6 +24,10 @@ namespace UserControlDemo
                 if ((value <= Maximum) && (value >= Minimun))
                 {
                     _value = value;
+                    if (_value == 50)
+                    {
+                        MessageBox.Show(50.ToString());
+                    }
                     RaisePropertyChanged("PropertyValue");
                 }
             }

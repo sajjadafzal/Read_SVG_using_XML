@@ -22,6 +22,7 @@ namespace UserControlDemo
             InitializeComponent();
             //this.DataContext = settings;
             ThresholdSliderControl.DataContext = settings;
+            ThresholdSliderControl2.DataContext = settings;
             //ThresholdSliderControl2.DataContext = settings;
         }
     }

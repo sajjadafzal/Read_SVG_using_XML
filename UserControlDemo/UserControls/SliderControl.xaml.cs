@@ -17,34 +17,29 @@ namespace UserControlDemo.UserControls
     /// <summary>
     /// Interaction logic for SliderControl.xaml
     /// </summary>
-    public partial class SliderControl : UserControl, INotifyPropertyChanged
+    public partial class SliderControl : UserControl
     {
         public SliderControl()
         {
             InitializeComponent();
-            (this.Content as FrameworkElement).DataContext = this;            
+            //(this.Content as FrameworkElement).DataContext = this;
+            //this.DataContext = this;
         }
 
         public int PropertyValue
         {
             get { return (int)GetValue(PropertyValueProperty); }
-            set { SetValue(PropertyValueProperty, value); }
+            set 
+            { 
+                SetValue(PropertyValueProperty, value);
+            }
         }
 
         // Using a DependencyProperty as the backing store for PropertyValue.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty PropertyValueProperty =
-            DependencyProperty.Register("PropertyValue", typeof(int), typeof(SliderControl), new PropertyMetadata(OnPropertyValueChanged));
+            DependencyProperty.Register("PropertyValue", typeof(int), typeof(SliderControl), new FrameworkPropertyMetadata(default(int),FrameworkPropertyMetadataOptions.BindsTwoWayByDefault));
 
-        static void OnPropertyValueChanged(DependencyObject obj, DependencyPropertyChangedEventArgs e)
-        {
-            (obj as SliderControl).OnPropertyValueChanged(e);
-        }
-
-        private void  OnPropertyValueChanged(DependencyPropertyChangedEventArgs e)
-        {
-            int PropertyNewValue = (int)e.NewValue;
-            SliderControlSlider.Value = PropertyNewValue;            
-        }
+        
 
         public int Minimum
         {

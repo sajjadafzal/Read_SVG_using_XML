@@ -16,7 +16,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TextBlock x:Name="SliderControlLabel" Text="{Binding Path=Title}" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="3,0,0,1"/>
+        <TextBlock x:Name="SliderControlLabel" Text="{Binding Path=Title, ElementName=mySliderControl}" FontSize="14" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Row="0" Grid.Column="0" Margin="3,0,0,1"/>
         <Slider x:Name="SliderControlSlider" Maximum="{Binding Path=Maximum, ElementName=mySliderControl}" Minimum="{Binding Path=Minimum, ElementName=mySliderControl}" Value="{Binding Path=PropertyValue, ElementName=mySliderControl, Mode=TwoWay}" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center" Margin="1, 0" TickFrequency="5" TickPlacement="BottomRight" IsSnapToTickEnabled="True"/>
         <TextBox x:Name="SliderControlTextBox" Text="{Binding Path=PropertyValue, ElementName=mySliderControl, UpdateSourceTrigger=LostFocus, Mode=TwoWay}" TextAlignment="Center" VerticalContentAlignment="Center" Margin="2" Grid.Row="0" Grid.Column="2" />
 

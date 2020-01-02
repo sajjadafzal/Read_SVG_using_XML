@@ -13,6 +13,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <local:SliderControl x:Name="ThresholdSliderControl" Title="{Binding Path=Label}" PropertyValue="{Binding Path=PropertyValue}" Maximum="{Binding Path=Maximum}" Minimum="{Binding Path=Minimum}" Grid.Row="0"/>
+        <local:SliderControl x:Name="ThresholdSliderControl2" Title="{Binding Path=Label}" PropertyValue="{Binding Path=PropertyValue}" Maximum="{Binding Path=Maximum}" Minimum="{Binding Path=Minimum}" Grid.Row="1"/>
         <!--<local:SliderControl x:Name="ThresholdSliderControl2" Title="{Binding Path=Label}" PropertyValue="{Binding Path=PropertyValue}" Maximum="{Binding Path=Maximum}" Minimum="{Binding Path=Minimum}" Grid.Row="1"/>-->
         
     </Grid>

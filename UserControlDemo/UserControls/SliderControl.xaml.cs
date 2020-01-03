@@ -75,14 +75,14 @@ namespace UserControlDemo.UserControls
             DependencyProperty.Register("Title", typeof(string), typeof(SliderControl));
 
 
-        public event PropertyChangedEventHandler PropertyChanged;
+        //public event PropertyChangedEventHandler PropertyChanged;
 
-        void SetValueDp(DependencyProperty property, object value, [System.Runtime.CompilerServices.CallerMemberName] string p = null)
-        {
-            SetValue(property, value);
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(p));
-        }
+        //void SetValueDp(DependencyProperty property, object value, [System.Runtime.CompilerServices.CallerMemberName] string p = null)
+        //{
+        //    SetValue(property, value);
+        //    if (PropertyChanged != null)
+        //        PropertyChanged(this, new PropertyChangedEventArgs(p));
+        //}
     }
 
     

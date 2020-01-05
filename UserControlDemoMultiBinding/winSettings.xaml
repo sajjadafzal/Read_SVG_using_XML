@@ -1,0 +1,20 @@
+﻿<Window x:Class="UserControlDemo.winSettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"        
+        xmlns:local="clr-namespace:UserControlDemo.UserControls"
+        mc:Ignorable="d"
+        Title="Settings" Height="450" Width="800">
+    <!--xmlns:local="clr-namespace:UserControlDemo"-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <local:SliderControl x:Name="ThresholdSliderControl" Title="{Binding Path=Label}" PropertyValue="{Binding Path=PropertyValue}" DecimalValue="{Binding Path=DecimalValue}" UseDecimal="{Binding Path=UseDecimal}" Maximum="{Binding Path=Maximum}" Minimum="{Binding Path=Minimum}" Grid.Row="0"/>
+        <local:SliderControl x:Name="ThresholdSliderControl2" Title="{Binding Path=Label}" PropertyValue="{Binding Path=PropertyValue}" DecimalValue="{Binding Path=DecimalValue}" UseDecimal="{Binding Path=UseDecimal}" Maximum="{Binding Path=Maximum}" Minimum="{Binding Path=Minimum}" Grid.Row="1"/>
+        <!--<local:SliderControl x:Name="ThresholdSliderControl2" Title="{Binding Path=Label}" PropertyValue="{Binding Path=PropertyValue}" Maximum="{Binding Path=Maximum}" Minimum="{Binding Path=Minimum}" Grid.Row="1"/>-->
+        
+    </Grid>
+</Window>

@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserControlDemo", "UserCont
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserControlDemoMultiBinding", "UserControlDemoMultiBinding\UserControlDemoMultiBinding.csproj", "{481E7B0F-50E9-4610-B766-0493EDB70CE0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPF_Polygon", "WPF_Polygon\WPF_Polygon.csproj", "{F2C1C2BE-2A7E-4CF5-B77C-D8A2BD685133}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -81,6 +83,10 @@ Global
 		{481E7B0F-50E9-4610-B766-0493EDB70CE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{481E7B0F-50E9-4610-B766-0493EDB70CE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{481E7B0F-50E9-4610-B766-0493EDB70CE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2C1C2BE-2A7E-4CF5-B77C-D8A2BD685133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2C1C2BE-2A7E-4CF5-B77C-D8A2BD685133}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2C1C2BE-2A7E-4CF5-B77C-D8A2BD685133}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2C1C2BE-2A7E-4CF5-B77C-D8A2BD685133}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
